@@ -1,0 +1,83 @@
+export type Book = {
+  name: string;
+  verses: number;
+  chapters: number;
+  abbreviation: string;
+};
+
+const books: Book[] = [
+  { name: "Gênesis", abbreviation: "Gn", chapters: 50, verses: 1533 },
+  { name: "Êxodo", abbreviation: "Êx", chapters: 40, verses: 1213 },
+  { name: "Levítico", abbreviation: "Lv", chapters: 27, verses: 859 },
+  { name: "Números", abbreviation: "Nm", chapters: 36, verses: 1288 },
+  { name: "Deuteronômio", abbreviation: "Dt", chapters: 34, verses: 959 },
+  { name: "Josué", abbreviation: "Js", chapters: 24, verses: 658 },
+  { name: "Juízes", abbreviation: "Jz", chapters: 21, verses: 619 },
+  { name: "Rute", abbreviation: "Rt", chapters: 4, verses: 85 },
+  { name: "1 Samuel", abbreviation: "1Sm", chapters: 31, verses: 811 },
+  { name: "2 Samuel", abbreviation: "2Sm", chapters: 24, verses: 695 },
+  { name: "1 Reis", abbreviation: "1Rs", chapters: 22, verses: 817 },
+  { name: "2 Reis", abbreviation: "2Rs", chapters: 25, verses: 719 },
+  { name: "1 Crônicas", abbreviation: "1Cr", chapters: 29, verses: 942 },
+  { name: "2 Crônicas", abbreviation: "2Cr", chapters: 36, verses: 822 },
+  { name: "Esdras", abbreviation: "Ed", chapters: 10, verses: 280 },
+  { name: "Neemias", abbreviation: "Ne", chapters: 13, verses: 406 },
+  { name: "Ester", abbreviation: "Et", chapters: 10, verses: 167 },
+  { name: "Jó", abbreviation: "Jó", chapters: 42, verses: 1070 },
+  { name: "Salmos", abbreviation: "Sl", chapters: 150, verses: 2461 },
+  { name: "Provérbios", abbreviation: "Pv", chapters: 31, verses: 915 },
+  { name: "Eclesiastes", abbreviation: "Ec", chapters: 12, verses: 222 },
+  { name: "Cantares", abbreviation: "Ct", chapters: 8, verses: 117 },
+  { name: "Isaías", abbreviation: "Is", chapters: 66, verses: 1292 },
+  { name: "Jeremias", abbreviation: "Jr", chapters: 52, verses: 1364 },
+  { name: "Lamentações", abbreviation: "Lm", chapters: 5, verses: 154 },
+  { name: "Ezequiel", abbreviation: "Ez", chapters: 48, verses: 1273 },
+  { name: "Daniel", abbreviation: "Dn", chapters: 12, verses: 357 },
+  { name: "Oseias", abbreviation: "Os", chapters: 14, verses: 197 },
+  { name: "Joel", abbreviation: "Jl", chapters: 3, verses: 73 },
+  { name: "Amós", abbreviation: "Am", chapters: 9, verses: 146 },
+  { name: "Obadias", abbreviation: "Ob", chapters: 1, verses: 21 },
+  { name: "Jonas", abbreviation: "Jn", chapters: 4, verses: 48 },
+  { name: "Miqueias", abbreviation: "Mq", chapters: 7, verses: 105 },
+  { name: "Naum", abbreviation: "Na", chapters: 3, verses: 47 },
+  { name: "Habacuque", abbreviation: "Hc", chapters: 3, verses: 56 },
+  { name: "Sofonias", abbreviation: "Sf", chapters: 3, verses: 53 },
+  { name: "Ageu", abbreviation: "Ag", chapters: 2, verses: 38 },
+  { name: "Zacarias", abbreviation: "Zc", chapters: 14, verses: 211 },
+  { name: "Malaquias", abbreviation: "Ml", chapters: 4, verses: 55 },
+
+  { name: "Mateus", abbreviation: "Mt", chapters: 28, verses: 1071 },
+  { name: "Marcos", abbreviation: "Mc", chapters: 16, verses: 678 },
+  { name: "Lucas", abbreviation: "Lc", chapters: 24, verses: 1151 },
+  { name: "João", abbreviation: "Jo", chapters: 21, verses: 879 },
+  {
+    name: "Atos dos Apóstolos",
+    abbreviation: "At",
+    chapters: 28,
+    verses: 1007
+  },
+  { name: "Romanos", abbreviation: "Rm", chapters: 16, verses: 433 },
+  { name: "1 Coríntios", abbreviation: "1Co", chapters: 16, verses: 437 },
+  { name: "2 Coríntios", abbreviation: "2Co", chapters: 13, verses: 256 },
+  { name: "Gálatas", abbreviation: "Gl", chapters: 6, verses: 149 },
+  { name: "Efésios", abbreviation: "Ef", chapters: 6, verses: 155 },
+  { name: "Filipenses", abbreviation: "Fp", chapters: 4, verses: 104 },
+  { name: "Colossenses", abbreviation: "Cl", chapters: 4, verses: 95 },
+  { name: "1 Tessalonicenses", abbreviation: "1Ts", chapters: 5, verses: 89 },
+  { name: "2 Tessalonicenses", abbreviation: "2Ts", chapters: 3, verses: 47 },
+  { name: "1 Timóteo", abbreviation: "1Tm", chapters: 6, verses: 113 },
+  { name: "2 Timóteo", abbreviation: "2Tm", chapters: 4, verses: 83 },
+  { name: "Tito", abbreviation: "Tt", chapters: 3, verses: 46 },
+  { name: "Filemom", abbreviation: "Fm", chapters: 1, verses: 25 },
+  { name: "Hebreus", abbreviation: "Hb", chapters: 13, verses: 303 },
+  { name: "Tiago", abbreviation: "Tg", chapters: 5, verses: 108 },
+  { name: "1 Pedro", abbreviation: "1Pe", chapters: 5, verses: 105 },
+  { name: "2 Pedro", abbreviation: "2Pe", chapters: 3, verses: 61 },
+  { name: "1 João", abbreviation: "1Jo", chapters: 5, verses: 105 },
+  { name: "2 João", abbreviation: "2Jo", chapters: 1, verses: 13 },
+  { name: "3 João", abbreviation: "3Jo", chapters: 1, verses: 15 },
+  { name: "Judas", abbreviation: "Jd", chapters: 1, verses: 25 },
+  { name: "Apocalipse", abbreviation: "Ap", chapters: 22, verses: 404 }
+];
+
+export default books;
