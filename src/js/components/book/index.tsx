@@ -43,3 +43,5 @@ export function BookContent(props: { book: Book }) {
     </section>
   );
 }
+
+export default BookContent;

@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "start": "webpack-dev-server --open"
+    "build": "NODE_ENV=production webpack",
+    "build:analyzer": "NODE_ENV=analyzer webpack",
+    "start": "NODE_ENV=development webpack-dev-server --open"
   },
   "repository": {
     "type": "git",
@@ -37,9 +38,12 @@
     "webpack-dev-server": "^3.3.1"
   },
   "dependencies": {
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@types/react": "^16.8.15",
     "@types/react-dom": "^16.8.4",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "webpack-bundle-analyzer": "^3.3.2",
+    "webpack-merge": "^4.2.1"
   }
 }

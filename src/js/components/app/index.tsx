@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import "./index.scss";
 
-import Progress from "../progress";
 import { Book } from "../../lib/books";
-import { BookContent } from "../book";
-import { NavBar } from "../nav";
 import Service from "../../lib/services";
+import Progress from "../progress";
+import { NavBar } from "../nav";
+const BookContent = React.lazy(() => import("../book"));
 
 export default function App() {
   const [book, setBook] = useState<null | Book>(null);
@@ -30,7 +30,9 @@ export default function App() {
 
       <div className="container">
         <NavBar onClick={setBook} selected={book} />
-        {book ? <BookContent book={book} /> : <h1>selecione um livro</h1>}
+        <Suspense fallback={<h1>loading...</h1>}>
+          {book ? <BookContent book={book} /> : <h1>selecione um livro</h1>}
+        </Suspense>
       </div>
     </div>
   );
