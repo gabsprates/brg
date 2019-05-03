@@ -1,64 +1,37 @@
-import React from "react";
-import "./index.css";
+import React, { useState, useEffect } from "react";
+import "./index.scss";
 
 import Progress from "../progress";
-import books, { Book } from "../../lib/books";
+import { Book } from "../../lib/books";
+import { BookContent } from "../book";
+import { NavBar } from "../nav";
 import Service from "../../lib/services";
 
-interface State {
-  book: null | Book;
-}
+export default function App() {
+  const [book, setBook] = useState<null | Book>(null);
 
-export default class App extends React.Component<{}, State> {
-  state = {
-    book: null
-  };
+  useEffect(() => {
+    console.log("atualizou app", Date.now());
+    if (book) {
+      document.title = `${book.name} - My Biblical Reading`;
+    }
+  });
 
-  setChapters = (book: Book) => {
-    this.setState({ book });
-  };
-
-  componentWillMount() {
+  useEffect(() => {
     console.log(Service.showProgress());
-  }
+  }, []);
 
-  render() {
-    return (
-      <div>
-        <header>
-          <h1>my biblical reading</h1>
-          <Progress value={0} />
-        </header>
+  return (
+    <div>
+      <header>
+        <h1 onClick={() => setBook(null)}>my biblical reading</h1>
+        <Progress value={0} />
+      </header>
 
-        <div className="container">
-          <nav>
-            {books.map(book => (
-              <p key={book.name} onClick={() => this.setChapters(book)}>
-                {book.name}
-              </p>
-            ))}
-          </nav>
-
-          {this.state.book ? (
-            <section className="book">
-              <h1>{this.state.book.name}</h1>
-              {Array(this.state.book.chapters)
-                .fill(null)
-                .map((_, index: number) => (
-                  <label key={`${this.state.book.abbreviation}_${index}`}>
-                    <input
-                      type="checkbox"
-                      name={`${this.state.book.abbreviation}_${index}`}
-                    />
-                    {index}
-                  </label>
-                ))}
-            </section>
-          ) : (
-            <h1>selecione um livro</h1>
-          )}
-        </div>
+      <div className="container">
+        <NavBar onClick={setBook} selected={book} />
+        {book ? <BookContent book={book} /> : <h1>selecione um livro</h1>}
       </div>
-    );
-  }
+    </div>
+  );
 }

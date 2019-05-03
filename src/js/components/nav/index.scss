@@ -1,0 +1,20 @@
+nav {
+  padding: 20px;
+  border-right: 2px solid #424242;
+}
+
+nav p {
+  &:hover {
+    color: #fff;
+    background-color: #424242;
+  }
+
+  &.selected {
+    color: #fff;
+    background-color: #630;
+
+    &:hover {
+      background-color: #930;
+    }
+  }
+}
