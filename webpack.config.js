@@ -10,7 +10,7 @@ console.log("== mode: ", process.env.NODE_ENV);
 const config = {
   entry: "./src/js/index.tsx",
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "docs"),
 
     // `filename` provides a template for naming your bundles (remember to use `[name]`)
     filename: "[name].[contenthash].js",
@@ -39,7 +39,7 @@ const devConfig = {
   mode: "development",
   devtool: "inline-source-map",
   devServer: {
-    contentBase: "./dist",
+    contentBase: "./docs",
     historyApiFallback: true,
     port: 8080,
     host: "0.0.0.0",
