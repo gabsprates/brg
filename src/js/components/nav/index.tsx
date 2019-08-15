@@ -1,21 +1,42 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./index.scss";
 
-import books, { Book } from "../../lib/books";
+import books from "../../lib/books";
 
-type PropsType = { onClick: Function; selected: null | Book };
+type PropsType = {
+  onSelect: (book: null | App.Book) => void;
+  selected: null | App.Book;
+};
 
-export function NavBar({ onClick, selected }: PropsType) {
-  const css = (book: Book) =>
+export function NavBar({ onSelect, selected }: PropsType) {
+  const css = (book: App.Book) =>
     selected && selected.name === book.name ? "selected" : "";
 
   return (
-    <nav>
-      {books.map(book => (
-        <p key={book.name} onClick={() => onClick(book)} className={css(book)}>
-          {book.name}
-        </p>
-      ))}
-    </nav>
+    <React.Fragment>
+      <nav className="nav">
+        {books.map(book => (
+          <p
+            key={"p" + book.name}
+            onClick={() => onSelect(book)}
+            className={css(book)}
+          >
+            {book.name}
+          </p>
+        ))}
+      </nav>
+      <select
+        onChange={e => onSelect(e.target.value ? books[+e.target.value] : null)}
+        className="select"
+        defaultValue=""
+      >
+        <option value="">Selecione um livro</option>
+        {books.map((book, index) => (
+          <option key={"o" + book.name} value={index}>
+            {book.name}
+          </option>
+        ))}
+      </select>
+    </React.Fragment>
   );
 }

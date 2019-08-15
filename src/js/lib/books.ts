@@ -1,11 +1,4 @@
-export type Book = {
-  name: string;
-  verses: number;
-  chapters: number;
-  abbreviation: string;
-};
-
-const books: Book[] = [
+const books: App.Book[] = [
   { name: "Gênesis", abbreviation: "Gn", chapters: 50, verses: 1533 },
   { name: "Êxodo", abbreviation: "Êx", chapters: 40, verses: 1213 },
   { name: "Levítico", abbreviation: "Lv", chapters: 27, verses: 859 },
@@ -79,5 +72,10 @@ const books: Book[] = [
   { name: "Judas", abbreviation: "Jd", chapters: 1, verses: 25 },
   { name: "Apocalipse", abbreviation: "Ap", chapters: 22, verses: 404 }
 ];
+
+export const totalChapters: number = books.reduce(
+  (prev, current) => prev + current.chapters,
+  0
+);
 
 export default books;

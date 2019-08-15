@@ -1,25 +1,35 @@
-type Progress = { [index in string]: number[] };
+const LS_TotalKey = "T";
 
 class Service {
-  progress: Progress;
-
   constructor() {
     if (!window.localStorage) {
       throw Error("update your browser");
     }
-
-    this.progress = JSON.parse(localStorage.getItem("prg") || "{}");
-
-    this.save = this.save.bind(this);
-    this.showProgress = this.showProgress.bind(this);
   }
 
-  save() {
-    localStorage.setItem("prg", JSON.stringify(this.progress));
+  getTotalProgress() {
+    const saved = localStorage.getItem(LS_TotalKey);
+    return saved ? JSON.parse(saved) : {};
   }
 
-  showProgress() {
-    console.log(this.progress);
+  setTotalProgress(data: { [book in string]: number }) {
+    const saved = localStorage.getItem(LS_TotalKey);
+    const obj = saved ? JSON.parse(saved) : {};
+    localStorage.setItem(LS_TotalKey, JSON.stringify({ ...obj, ...data }));
+  }
+
+  save(book: string, chapters: number[]) {
+    new Promise(resolve => {
+      this.setTotalProgress({ [book]: chapters.length });
+      localStorage.setItem(book, JSON.stringify(chapters));
+      resolve();
+    });
+  }
+
+  progressOf(book: string): number[] {
+    const data = localStorage.getItem(book);
+    if (data) return JSON.parse(data);
+    return [];
   }
 }
 

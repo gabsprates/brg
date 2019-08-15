@@ -19,4 +19,17 @@
     margin: 0 auto;
     display: block;
   }
+
+  &.on {
+    color: #fff;
+    background: #424242;
+
+    &:hover {
+      color: #fff;
+      background: #9e9e9e;
+    }
+  }
+  &:hover {
+    background: #d6d6d6;
+  }
 }

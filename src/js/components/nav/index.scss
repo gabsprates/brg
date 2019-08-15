@@ -1,20 +1,37 @@
-nav {
+.nav {
   padding: 20px;
   border-right: 2px solid #424242;
 }
 
-nav p {
+.nav p {
   &:hover {
-    color: #fff;
-    background-color: #424242;
+    background-color: #d6d6d6;
   }
 
   &.selected {
     color: #fff;
-    background-color: #630;
+    background: #424242;
 
     &:hover {
-      background-color: #930;
+      color: #fff;
+      background: #9e9e9e;
     }
+  }
+}
+
+.select {
+  border: 1px solid #424242;
+  margin: 20px;
+  display: none;
+  padding: 10px;
+  background: #fff;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+  }
+  .select {
+    display: block;
   }
 }

@@ -1,7 +1,14 @@
 import React from "react";
+import { totalChapters } from "../../lib/books";
 
-interface P {
+import "./index.scss";
+
+type P = {
   value: number;
-}
+};
 
-export default ({ value }: P) => <progress max={100} value={value} />;
+const Progress = React.memo(({ value }: P) => (
+  <progress max={totalChapters} value={value} />
+));
+
+export default Progress;

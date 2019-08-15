@@ -36,6 +36,7 @@ const config = {
 };
 
 const devConfig = {
+  mode: "development",
   devtool: "inline-source-map",
   devServer: {
     contentBase: "./dist",
@@ -47,6 +48,7 @@ const devConfig = {
 };
 
 const prodConfig = {
+  mode: "production",
   plugins: (function() {
     const plugins = [new CleanWebpackPlugin()];
 
