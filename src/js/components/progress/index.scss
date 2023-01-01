@@ -1,3 +1,9 @@
 progress {
   width: 100%;
 }
+
+progress::after {
+  content: attr(data-percentage) " %";
+  display: block;
+  padding-top: 1rem;
+}

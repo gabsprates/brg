@@ -9,8 +9,12 @@ const BookContent = React.lazy(() => import("../book"));
 export default function App() {
   const [book, setBook] = useState<null | App.Book>(null);
   useEffect(() => {
+    const title = "Minha Leitura Bíblica";
+
     if (book) {
-      document.title = `${book.name} - Minha Leitura Bíblica`;
+      document.title = `${book.name} - ${title}`;
+    } else {
+      document.title = title;
     }
   }, [book]);
 
@@ -22,7 +26,7 @@ export default function App() {
   const onChangeState = ({ book, total }: App.BookProgress) => {
     setProgress({
       ...progress,
-      [book]: total
+      [book]: total,
     });
   };
 
