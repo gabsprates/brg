@@ -37,11 +37,29 @@ export default function App() {
     );
   };
 
+  const exportToClipboard = async () => {
+    try {
+      const dump = 'x';
+      await navigator.clipboard.writeText(dump);
+      alert(dump);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const importDatabase = async () => {
+    const db = prompt();
+    console.log(db);
+  };
+
   return (
     <div>
       <header>
         <h1 onClick={() => setBook(null)}>Minha Leitura Bíblica</h1>
         <Progress value={calcProgress()} />
+
+        <button onClick={alert}>export</button>
+        <button onClick={alert}>import</button>
       </header>
 
       <div className="container">
