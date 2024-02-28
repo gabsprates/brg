@@ -1,10 +1,10 @@
-import { useState, useEffect, Suspense, lazy } from "react";
+import { useState, useEffect, Suspense } from "react";
 import "./index.css";
 
 import Service from "../../lib/services";
 import Progress from "../progress";
 import { NavBar } from "../nav";
-const BookContent = lazy(() => import("../book"));
+import BookContent from "../book";
 
 export default function App() {
   const [book, setBook] = useState<null | App.Book>(null);
@@ -52,16 +52,14 @@ export default function App() {
     console.log(db);
   };
 
-  console.log(exportToClipboard, importDatabase);
-
   return (
     <div>
       <header>
         <h1 onClick={() => setBook(null)}>Minha Leitura Bíblica</h1>
         <Progress value={calcProgress()} />
 
-        <button onClick={alert}>export</button>
-        <button onClick={alert}>import</button>
+        <button onClick={() => exportToClipboard()}>export</button>
+        <button onClick={() => importDatabase()}>import</button>
       </header>
 
       <div className="container">
