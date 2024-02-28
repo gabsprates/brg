@@ -19,9 +19,10 @@ class Service {
   }
 
   save(book: string, chapters: number[]) {
-    new Promise(resolve => {
+    return new Promise<void>((resolve) => {
       this.setTotalProgress({ [book]: chapters.length });
       localStorage.setItem(book, JSON.stringify(chapters));
+
       resolve();
     });
   }

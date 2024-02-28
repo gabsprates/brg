@@ -52,6 +52,8 @@ export default function App() {
     console.log(db);
   };
 
+  console.log(exportToClipboard, importDatabase);
+
   return (
     <div>
       <header>
