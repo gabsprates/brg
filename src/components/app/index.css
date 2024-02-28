@@ -24,9 +24,8 @@ header {
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
-
-    > h1 {
-      display: none;
-    }
+  }
+  .container > h1 {
+    display: none;
   }
 }

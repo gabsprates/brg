@@ -1,5 +1,5 @@
-import React, { useState, useLayoutEffect, useEffect, useRef } from "react";
-import "./index.scss";
+import { useState, useLayoutEffect } from "react";
+import "./index.css";
 import Service from "../../lib/services";
 
 type Props = {
@@ -27,7 +27,7 @@ export function BookContent(props: Props) {
 
     props.onChangeState({
       book: props.book.abbreviation,
-      total: newChapters.length
+      total: newChapters.length,
     });
 
     Service.save(book.abbreviation, newChapters);

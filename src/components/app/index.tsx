@@ -1,10 +1,10 @@
-import React, { useState, useEffect, Suspense } from "react";
-import "./index.scss";
+import { useState, useEffect, Suspense, lazy } from "react";
+import "./index.css";
 
 import Service from "../../lib/services";
 import Progress from "../progress";
 import { NavBar } from "../nav";
-const BookContent = React.lazy(() => import("../book"));
+const BookContent = lazy(() => import("../book"));
 
 export default function App() {
   const [book, setBook] = useState<null | App.Book>(null);
@@ -39,7 +39,7 @@ export default function App() {
 
   const exportToClipboard = async () => {
     try {
-      const dump = 'x';
+      const dump = "x";
       await navigator.clipboard.writeText(dump);
       alert(dump);
     } catch (e) {

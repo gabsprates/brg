@@ -1,13 +1,13 @@
-import React from "react";
+import { memo } from "react";
 import { totalChapters } from "../../lib/books";
 
-import "./index.scss";
+import "./index.css";
 
 type P = {
   value: number;
 };
 
-const Progress = React.memo(({ value }: P) => {
+const Progress = memo(({ value }: P) => {
   const percentage = (value * 100) / totalChapters;
 
   return (

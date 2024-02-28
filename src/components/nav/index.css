@@ -3,20 +3,18 @@
   border-right: 2px solid #424242;
 }
 
-.nav p {
-  &:hover {
-    background-color: #d6d6d6;
-  }
+.nav p:hover {
+  background-color: #d6d6d6;
+}
 
-  &.selected {
-    color: #fff;
-    background: #424242;
+.nav p.selected {
+  color: #fff;
+  background: #424242;
+}
 
-    &:hover {
-      color: #fff;
-      background: #9e9e9e;
-    }
-  }
+.nav p.selected:hover {
+  color: #fff;
+  background: #9e9e9e;
 }
 
 .select {

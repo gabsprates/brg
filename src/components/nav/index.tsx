@@ -1,5 +1,5 @@
-import React from "react";
-import "./index.scss";
+import { Fragment } from "react";
+import "./index.css";
 
 import books from "../../lib/books";
 
@@ -13,9 +13,9 @@ export function NavBar({ onSelect, selected }: PropsType) {
     selected && selected.name === book.name ? "selected" : "";
 
   return (
-    <React.Fragment>
+    <Fragment>
       <nav className="nav">
-        {books.map(book => (
+        {books.map((book) => (
           <p
             key={"p" + book.name}
             onClick={() => onSelect(book)}
@@ -26,7 +26,9 @@ export function NavBar({ onSelect, selected }: PropsType) {
         ))}
       </nav>
       <select
-        onChange={e => onSelect(e.target.value ? books[+e.target.value] : null)}
+        onChange={(e) =>
+          onSelect(e.target.value ? books[+e.target.value] : null)
+        }
         className="select"
         defaultValue=""
       >
@@ -37,6 +39,6 @@ export function NavBar({ onSelect, selected }: PropsType) {
           </option>
         ))}
       </select>
-    </React.Fragment>
+    </Fragment>
   );
 }
