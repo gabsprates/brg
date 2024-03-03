@@ -1,19 +1,22 @@
 import { useState, useLayoutEffect } from "react";
 import "./index.css";
-import Service from "../../lib/services";
 
-type Props = {
+type BookContentProps = {
   book: App.Book;
+  service: App.Service;
   onChangeState: (data: App.BookProgress) => void;
 };
 
-export function BookContent(props: Props) {
-  const { book } = props;
+export function BookContent({
+  book,
+  service,
+  onChangeState,
+}: BookContentProps) {
   const [chapters, setChapters] = useState<number[]>([]);
 
   useLayoutEffect(() => {
-    setChapters(Service.progressOf(book.abbreviation));
-  }, [book]);
+    setChapters(service.progressOf(book.abbreviation));
+  }, [book, service]);
 
   const handleChapter = (ch: number) => {
     const index = chapters.indexOf(ch);
@@ -25,12 +28,12 @@ export function BookContent(props: Props) {
       newChapters.splice(index, 1);
     }
 
-    props.onChangeState({
-      book: props.book.abbreviation,
+    onChangeState({
+      book: book.abbreviation,
       total: newChapters.length,
     });
 
-    Service.save(book.abbreviation, newChapters);
+    service.save(book.abbreviation, newChapters);
 
     setChapters(newChapters);
   };

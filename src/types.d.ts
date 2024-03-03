@@ -7,4 +7,11 @@ declare namespace App {
     chapters: number;
     abbreviation: string;
   };
+
+  interface Service {
+    getTotalProgress(): { [book in string]: number };
+    setTotalProgress(data: { [book in string]: number }): void;
+    save(book: string, chapters: number[]): Promise<void>;
+    progressOf(book: string): number[];
+  }
 }

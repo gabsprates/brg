@@ -1,16 +1,16 @@
 import { useState, useEffect, Suspense, useMemo } from "react";
 import "./index.css";
 
-import Service from "../../lib/services";
 import { Progress } from "../progress";
 import { NavBar } from "../nav";
 import BookContent from "../book";
 
 interface AppProps {
   books: App.Book[];
+  service: App.Service;
 }
 
-export function App({ books }: AppProps) {
+export function App({ books, service }: AppProps) {
   const [book, setBook] = useState<null | App.Book>(null);
   useEffect(() => {
     const title = "Minha Leitura Bíblica";
@@ -24,8 +24,8 @@ export function App({ books }: AppProps) {
 
   const [progress, setProgress] = useState<{ [book in string]: number }>({});
   useEffect(() => {
-    setProgress(Service.getTotalProgress());
-  }, []);
+    setProgress(service.getTotalProgress());
+  }, [service]);
 
   const totalChapters = useMemo(() => {
     return books.reduce((prev, current) => prev + current.chapters, 0);
@@ -64,6 +64,7 @@ export function App({ books }: AppProps) {
     <div>
       <header>
         <h1 onClick={() => setBook(null)}>Minha Leitura Bíblica</h1>
+
         <Progress value={calcProgress()} total={totalChapters} />
 
         <button onClick={() => exportToClipboard()}>export</button>
@@ -72,9 +73,14 @@ export function App({ books }: AppProps) {
 
       <div className="container">
         <NavBar books={books} onSelect={setBook} selected={book} />
+
         <Suspense fallback={<h1>loading...</h1>}>
           {book ? (
-            <BookContent book={book} onChangeState={onChangeState} />
+            <BookContent
+              book={book}
+              service={service}
+              onChangeState={onChangeState}
+            />
           ) : (
             <h1>selecione um livro</h1>
           )}

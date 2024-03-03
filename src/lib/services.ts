@@ -1,37 +1,32 @@
-const LS_TotalKey = "T";
+export const makeService = ({ storage }: { storage: Storage }): App.Service => {
+  const LS_TotalKey = "T";
 
-class Service {
-  constructor() {
-    if (!window.localStorage) {
-      throw Error("update your browser");
-    }
-  }
+  return {
+    getTotalProgress() {
+      const saved = storage.getItem(LS_TotalKey);
+      return saved ? JSON.parse(saved) : {};
+    },
 
-  getTotalProgress() {
-    const saved = localStorage.getItem(LS_TotalKey);
-    return saved ? JSON.parse(saved) : {};
-  }
+    setTotalProgress(data: { [book in string]: number }) {
+      const saved = storage.getItem(LS_TotalKey);
+      const obj = saved ? JSON.parse(saved) : {};
+      storage.setItem(LS_TotalKey, JSON.stringify({ ...obj, ...data }));
+    },
 
-  setTotalProgress(data: { [book in string]: number }) {
-    const saved = localStorage.getItem(LS_TotalKey);
-    const obj = saved ? JSON.parse(saved) : {};
-    localStorage.setItem(LS_TotalKey, JSON.stringify({ ...obj, ...data }));
-  }
+    save(book: string, chapters: number[]) {
+      return new Promise<void>((resolve) => {
+        this.setTotalProgress({ [book]: chapters.length });
+        storage.setItem(book, JSON.stringify(chapters));
 
-  save(book: string, chapters: number[]) {
-    return new Promise<void>((resolve) => {
-      this.setTotalProgress({ [book]: chapters.length });
-      localStorage.setItem(book, JSON.stringify(chapters));
+        resolve();
+      });
+    },
 
-      resolve();
-    });
-  }
+    progressOf(book: string) {
+      const data = storage.getItem(book);
+      if (data) return JSON.parse(data);
 
-  progressOf(book: string): number[] {
-    const data = localStorage.getItem(book);
-    if (data) return JSON.parse(data);
-    return [];
-  }
-}
-
-export default new Service();
+      return [];
+    },
+  };
+};
