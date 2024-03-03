@@ -1,34 +1,36 @@
 import { Fragment } from "react";
 import "./index.css";
 
-import books from "../../lib/books";
-
 type PropsType = {
+  books: App.Book[];
   onSelect: (book: null | App.Book) => void;
   selected: null | App.Book;
 };
 
-export function NavBar({ onSelect, selected }: PropsType) {
+export function NavBar({ books, onSelect, selected }: PropsType) {
   const css = (book: App.Book) =>
     selected && selected.name === book.name ? "selected" : "";
 
   return (
     <Fragment>
       <nav className="nav">
-        {books.map((book) => (
-          <p
-            key={"p" + book.name}
-            onClick={() => onSelect(book)}
-            className={css(book)}
-          >
-            {book.name}
-          </p>
-        ))}
+        <ul>
+          {books.map((book) => (
+            <li
+              key={"p" + book.name}
+              onClick={() => onSelect(book)}
+              className={css(book)}
+            >
+              {book.name}
+            </li>
+          ))}
+        </ul>
       </nav>
+
       <select
-        onChange={(e) =>
-          onSelect(e.target.value ? books[+e.target.value] : null)
-        }
+        onChange={(e) => {
+          onSelect(e.target.value ? books[+e.target.value] : null);
+        }}
         className="select"
         defaultValue=""
       >

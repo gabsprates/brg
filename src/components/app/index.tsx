@@ -7,7 +7,11 @@ import { NavBar } from "../nav";
 import BookContent from "../book";
 import { totalChapters } from "../../lib/books";
 
-export default function App() {
+interface AppProps {
+  books: App.Book[];
+}
+
+export function App({ books }: AppProps) {
   const [book, setBook] = useState<null | App.Book>(null);
   useEffect(() => {
     const title = "Minha Leitura Bíblica";
@@ -64,7 +68,7 @@ export default function App() {
       </header>
 
       <div className="container">
-        <NavBar onSelect={setBook} selected={book} />
+        <NavBar books={books} onSelect={setBook} selected={book} />
         <Suspense fallback={<h1>loading...</h1>}>
           {book ? (
             <BookContent book={book} onChangeState={onChangeState} />
