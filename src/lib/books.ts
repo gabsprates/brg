@@ -1,4 +1,4 @@
-const books: App.Book[] = [
+export const books: App.Book[] = [
   { name: "Gênesis", abbreviation: "Gn", chapters: 50, verses: 1533 },
   { name: "Êxodo", abbreviation: "Êx", chapters: 40, verses: 1213 },
   { name: "Levítico", abbreviation: "Lv", chapters: 27, verses: 859 },
@@ -47,7 +47,7 @@ const books: App.Book[] = [
     name: "Atos dos Apóstolos",
     abbreviation: "At",
     chapters: 28,
-    verses: 1007
+    verses: 1007,
   },
   { name: "Romanos", abbreviation: "Rm", chapters: 16, verses: 433 },
   { name: "1 Coríntios", abbreviation: "1Co", chapters: 16, verses: 437 },
@@ -70,12 +70,5 @@ const books: App.Book[] = [
   { name: "2 João", abbreviation: "2Jo", chapters: 1, verses: 13 },
   { name: "3 João", abbreviation: "3Jo", chapters: 1, verses: 15 },
   { name: "Judas", abbreviation: "Jd", chapters: 1, verses: 25 },
-  { name: "Apocalipse", abbreviation: "Ap", chapters: 22, verses: 404 }
+  { name: "Apocalipse", abbreviation: "Ap", chapters: 22, verses: 404 },
 ];
-
-export const totalChapters: number = books.reduce(
-  (prev, current) => prev + current.chapters,
-  0
-);
-
-export default books;

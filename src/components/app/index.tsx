@@ -1,11 +1,10 @@
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, Suspense, useMemo } from "react";
 import "./index.css";
 
 import Service from "../../lib/services";
 import { Progress } from "../progress";
 import { NavBar } from "../nav";
 import BookContent from "../book";
-import { totalChapters } from "../../lib/books";
 
 interface AppProps {
   books: App.Book[];
@@ -27,6 +26,10 @@ export function App({ books }: AppProps) {
   useEffect(() => {
     setProgress(Service.getTotalProgress());
   }, []);
+
+  const totalChapters = useMemo(() => {
+    return books.reduce((prev, current) => prev + current.chapters, 0);
+  }, [books]);
 
   const onChangeState = ({ book, total }: App.BookProgress) => {
     setProgress({
