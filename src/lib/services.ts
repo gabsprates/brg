@@ -28,5 +28,22 @@ export const makeService = ({ storage }: { storage: Storage }): App.Service => {
 
       return [];
     },
+
+    async dump(bookKeys: string[]) {
+      const result = {
+        total: this.getTotalProgress(),
+        books: {} as Record<string, number[]>,
+      };
+
+      bookKeys.forEach((book) => {
+        const data = this.progressOf(book);
+
+        if (data.length) {
+          result.books[book] = data;
+        }
+      });
+
+      return result;
+    },
   };
 };

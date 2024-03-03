@@ -1,4 +1,4 @@
-import { useState, useEffect, Suspense, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import "./index.css";
 
 import { Progress } from "../progress";
@@ -27,6 +27,13 @@ export function App({ books, service }: AppProps) {
     setProgress(service.getTotalProgress());
   }, [service]);
 
+  const [dump, setDump] = useState("");
+  const refDialog = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    if (!dump) return;
+    refDialog.current?.showModal();
+  }, [dump]);
+
   const totalChapters = useMemo(() => {
     return books.reduce((prev, current) => prev + current.chapters, 0);
   }, [books]);
@@ -45,19 +52,23 @@ export function App({ books, service }: AppProps) {
     );
   };
 
-  const exportToClipboard = async () => {
+  const exportData = async () => {
     try {
-      const dump = "x";
-      await navigator.clipboard.writeText(dump);
-      alert(dump);
+      const bookKeys = books.map(({ abbreviation }) => abbreviation);
+      const dump = await service.dump(bookKeys);
+      setDump(JSON.stringify(dump));
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 
-  const importDatabase = async () => {
-    const db = prompt();
-    console.log(db);
+  const importData = async () => {
+    try {
+      const db = prompt("db", "");
+      console.log(db);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -67,25 +78,41 @@ export function App({ books, service }: AppProps) {
 
         <Progress value={calcProgress()} total={totalChapters} />
 
-        <button onClick={() => exportToClipboard()}>export</button>
-        <button onClick={() => importDatabase()}>import</button>
+        <div style={{ paddingTop: "1rem" }}>
+          <button onClick={() => exportData()}>export</button>
+          <button onClick={() => importData()}>import</button>
+        </div>
       </header>
 
       <div className="container">
         <NavBar books={books} onSelect={setBook} selected={book} />
 
-        <Suspense fallback={<h1>loading...</h1>}>
-          {book ? (
-            <BookContent
-              book={book}
-              service={service}
-              onChangeState={onChangeState}
-            />
-          ) : (
-            <h1>selecione um livro</h1>
-          )}
-        </Suspense>
+        {book ? (
+          <BookContent
+            book={book}
+            service={service}
+            onChangeState={onChangeState}
+          />
+        ) : (
+          <h1>selecione um livro</h1>
+        )}
       </div>
+
+      <dialog ref={refDialog} className="dialog">
+        <pre>{dump}</pre>
+
+        <br />
+
+        <button
+          autoFocus
+          onClick={() => {
+            refDialog.current?.close();
+            setDump("");
+          }}
+        >
+          Close
+        </button>
+      </dialog>
     </div>
   );
 }

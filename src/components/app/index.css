@@ -21,6 +21,16 @@ header {
   display: flex;
 }
 
+.dialog {
+  margin: 2rem;
+  padding: 2rem;
+
+  pre {
+    white-space: normal;
+    word-break: break-all;
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
