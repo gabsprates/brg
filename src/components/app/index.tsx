@@ -2,9 +2,10 @@ import { useState, useEffect, Suspense } from "react";
 import "./index.css";
 
 import Service from "../../lib/services";
-import Progress from "../progress";
+import { Progress } from "../progress";
 import { NavBar } from "../nav";
 import BookContent from "../book";
+import { totalChapters } from "../../lib/books";
 
 export default function App() {
   const [book, setBook] = useState<null | App.Book>(null);
@@ -56,7 +57,7 @@ export default function App() {
     <div>
       <header>
         <h1 onClick={() => setBook(null)}>Minha Leitura Bíblica</h1>
-        <Progress value={calcProgress()} />
+        <Progress value={calcProgress()} total={totalChapters} />
 
         <button onClick={() => exportToClipboard()}>export</button>
         <button onClick={() => importDatabase()}>import</button>

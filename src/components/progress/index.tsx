@@ -1,18 +1,12 @@
-import { memo } from "react";
-import { totalChapters } from "../../lib/books";
-
 import "./index.css";
 
-type P = {
+type ProgressProps = {
   value: number;
+  total: number;
 };
 
-const Progress = memo(({ value }: P) => {
-  const percentage = (value * 100) / totalChapters;
+export const Progress = ({ value, total }: ProgressProps) => {
+  const percentage = (value * 100) / (total || 1);
 
-  return (
-    <progress max={totalChapters} value={value} data-percentage={percentage} />
-  );
-});
-
-export default Progress;
+  return <progress max={total} value={value} data-percentage={percentage} />;
+};
