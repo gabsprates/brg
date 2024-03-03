@@ -56,6 +56,7 @@ export function App({ books, service }: AppProps) {
     try {
       const bookKeys = books.map(({ abbreviation }) => abbreviation);
       const dump = await service.dump(bookKeys);
+
       setDump(JSON.stringify(dump));
     } catch (e) {
       console.error(e);
@@ -64,8 +65,11 @@ export function App({ books, service }: AppProps) {
 
   const importData = async () => {
     try {
-      const db = prompt("db", "");
-      console.log(db);
+      const db = prompt("db", "") ?? "";
+      await service.loadBatch(JSON.parse(db));
+
+      setProgress(service.getTotalProgress());
+      setBook(null);
     } catch (error) {
       console.error(error);
     }

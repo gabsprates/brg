@@ -8,14 +8,17 @@ declare namespace App {
     abbreviation: string;
   };
 
+  interface Data {
+    total: Record<string, number>;
+    books: Record<string, number[]>;
+  }
+
   interface Service {
     getTotalProgress(): Record<string, number>;
     setTotalProgress(data: Record<string, number>): void;
     save(book: string, chapters: number[]): Promise<void>;
     progressOf(book: string): number[];
-    dump(bookKeys: string[]): Promise<{
-      total: Record<string, number>;
-      books: Record<string, number[]>;
-    }>;
+    dump(bookKeys: string[]): Promise<Data>;
+    loadBatch(data: Data): Promise<void>;
   }
 }

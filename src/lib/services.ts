@@ -7,13 +7,13 @@ export const makeService = ({ storage }: { storage: Storage }): App.Service => {
       return saved ? JSON.parse(saved) : {};
     },
 
-    setTotalProgress(data: { [book in string]: number }) {
+    setTotalProgress(data) {
       const saved = storage.getItem(LS_TotalKey);
       const obj = saved ? JSON.parse(saved) : {};
       storage.setItem(LS_TotalKey, JSON.stringify({ ...obj, ...data }));
     },
 
-    save(book: string, chapters: number[]) {
+    save(book, chapters) {
       return new Promise<void>((resolve) => {
         this.setTotalProgress({ [book]: chapters.length });
         storage.setItem(book, JSON.stringify(chapters));
@@ -22,14 +22,14 @@ export const makeService = ({ storage }: { storage: Storage }): App.Service => {
       });
     },
 
-    progressOf(book: string) {
+    progressOf(book) {
       const data = storage.getItem(book);
       if (data) return JSON.parse(data);
 
       return [];
     },
 
-    async dump(bookKeys: string[]) {
+    async dump(bookKeys) {
       const result = {
         total: this.getTotalProgress(),
         books: {} as Record<string, number[]>,
@@ -44,6 +44,12 @@ export const makeService = ({ storage }: { storage: Storage }): App.Service => {
       });
 
       return result;
+    },
+
+    async loadBatch(data) {
+      Object.entries(data.books).forEach(([book, chapters]) => {
+        this.save(book, chapters);
+      });
     },
   };
 };
