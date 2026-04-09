@@ -21,6 +21,17 @@ export function App({ books, service }: AppProps) {
     } else {
       document.title = title;
     }
+
+    if (!book && location.hash) {
+      const hashBook = books.find(
+        (_book) => `#${_book.abbreviation}` === location.hash,
+      );
+      console.log(hashBook);
+
+      if (hashBook) {
+        setBook(hashBook);
+      }
+    }
   }, [book]);
 
   const [progress, setProgress] = useState<{ [book in string]: number }>({});
@@ -44,6 +55,11 @@ export function App({ books, service }: AppProps) {
       ...progress,
       [book]: total,
     });
+  };
+
+  const onChangeBook = (book: Book | null) => {
+    setBook(book);
+    location.hash = book?.abbreviation ?? "";
   };
 
   const calcProgress = (): number => {
@@ -90,7 +106,7 @@ export function App({ books, service }: AppProps) {
       </header>
 
       <div className="container">
-        <NavBar books={books} onSelect={setBook} selected={book} />
+        <NavBar books={books} onSelect={onChangeBook} selected={book} />
 
         {book ? (
           <BookContent
