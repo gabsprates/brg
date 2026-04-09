@@ -1,28 +1,29 @@
 .nav {
   padding: 20px;
-  border-right: 2px solid #424242;
+  border-right: 2px solid var(--border-default);
 }
 
 .nav li:hover {
-  background-color: #d6d6d6;
+  background-color: var(--bg-item-hover);
 }
 
 .nav li.selected {
-  color: #fff;
-  background: #424242;
+  color: var(--text);
+  background: var(--bg-item-hover);
 }
 
 .nav li.selected:hover {
-  color: #fff;
-  background: #9e9e9e;
+  color: var(--text);
+  background: var(--bg-item-hover);
 }
 
 .select {
-  border: 1px solid #424242;
+  border: 1px solid var(--border-default);
   margin: 20px;
   display: none;
   padding: 10px;
-  background: #fff;
+  background: var(--bg-page);
+  color: var(--text);
 }
 
 @media (max-width: 768px) {
