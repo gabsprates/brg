@@ -1,8 +1,9 @@
 import { render, screen, within } from "@testing-library/react";
 import { NavBar } from ".";
+import type { Book } from "../../types";
 
 describe("Component: NavBar", () => {
-  const books: App.Book[] = [
+  const books: Book[] = [
     { abbreviation: "Aa", chapters: 10, name: "A Book", verses: 10 * 10 },
     { abbreviation: "Bb", chapters: 20, name: "B Book", verses: 10 * 20 },
     { abbreviation: "Cc", chapters: 30, name: "C Book", verses: 10 * 30 },

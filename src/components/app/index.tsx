@@ -4,14 +4,15 @@ import "./index.css";
 import { Progress } from "../progress";
 import { NavBar } from "../nav";
 import BookContent from "../book";
+import type { Book, BookProgress, Service } from "../../types";
 
 interface AppProps {
-  books: App.Book[];
-  service: App.Service;
+  books: Book[];
+  service: Service;
 }
 
 export function App({ books, service }: AppProps) {
-  const [book, setBook] = useState<null | App.Book>(null);
+  const [book, setBook] = useState<null | Book>(null);
   useEffect(() => {
     const title = "Minha Leitura Bíblica";
 
@@ -38,7 +39,7 @@ export function App({ books, service }: AppProps) {
     return books.reduce((prev, current) => prev + current.chapters, 0);
   }, [books]);
 
-  const onChangeState = ({ book, total }: App.BookProgress) => {
+  const onChangeState = ({ book, total }: BookProgress) => {
     setProgress({
       ...progress,
       [book]: total,
@@ -48,7 +49,7 @@ export function App({ books, service }: AppProps) {
   const calcProgress = (): number => {
     return Object.entries(progress).reduce(
       (total, [, bookTotal]) => total + bookTotal,
-      0
+      0,
     );
   };
 

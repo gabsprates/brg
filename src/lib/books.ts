@@ -1,4 +1,6 @@
-export const books: App.Book[] = [
+import type { Book } from "../types";
+
+export const books: Book[] = [
   { name: "Gênesis", abbreviation: "Gn", chapters: 50, verses: 1533 },
   { name: "Êxodo", abbreviation: "Êx", chapters: 40, verses: 1213 },
   { name: "Levítico", abbreviation: "Lv", chapters: 27, verses: 859 },

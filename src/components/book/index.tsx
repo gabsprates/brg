@@ -1,10 +1,11 @@
 import { useState, useLayoutEffect } from "react";
 import "./index.css";
+import type { Book, BookProgress, Service } from "../../types";
 
 type BookContentProps = {
-  book: App.Book;
-  service: App.Service;
-  onChangeState: (data: App.BookProgress) => void;
+  book: Book;
+  service: Service;
+  onChangeState: (data: BookProgress) => void;
 };
 
 export function BookContent({

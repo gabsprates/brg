@@ -1,4 +1,6 @@
-export const makeService = ({ storage }: { storage: Storage }): App.Service => {
+import type { Service } from "../types";
+
+export const makeService = ({ storage }: { storage: Storage }): Service => {
   const LS_TotalKey = "T";
 
   return {

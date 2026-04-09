@@ -1,14 +1,15 @@
 import { Fragment } from "react";
 import "./index.css";
+import type { Book } from "../../types";
 
 type PropsType = {
-  books: App.Book[];
-  onSelect: (book: null | App.Book) => void;
-  selected: null | App.Book;
+  books: Book[];
+  onSelect: (book: null | Book) => void;
+  selected: null | Book;
 };
 
 export function NavBar({ books, onSelect, selected }: PropsType) {
-  const css = (book: App.Book) =>
+  const css = (book: Book) =>
     selected && selected.name === book.name ? "selected" : "";
 
   return (
