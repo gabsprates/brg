@@ -20,6 +20,7 @@
   "bugs": {
     "url": "https://github.com/gabsprates/brg/issues"
   },
+  "packageManager": "yarn@4.13.0",
   "homepage": "https://github.com/gabsprates/brg#readme",
   "dependencies": {
     "react": "^18.2.0",
